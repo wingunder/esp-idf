@@ -17,6 +17,10 @@
 
 #include "esp_vfs.h"
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 /**
  * @brief add /dev/uart virtual filesystem driver
  *
@@ -24,5 +28,8 @@
  */
 void esp_vfs_dev_uart_register();
 
+#ifdef __cplusplus
+} // extern "C"
+#endif
 
 #endif //__ESP_VFS_DEV_H__
