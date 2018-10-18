@@ -130,7 +130,7 @@ typedef enum {
  *
  */
 typedef struct {
-    i2s_mode_t              mode;                   /*!< I2S work mode*/
+    int                     mode;                   /*!< I2S work mode*/
     int                     sample_rate;            /*!< I2S sample rate*/
     i2s_bits_per_sample_t   bits_per_sample;        /*!< I2S bits per sample*/
     i2s_channel_fmt_t       channel_format;         /*!< I2S channel format */

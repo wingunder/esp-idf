@@ -57,3 +57,8 @@
 [submodule "components/mqtt/esp-mqtt"]
 	path = components/mqtt/esp-mqtt
 	url = https://github.com/espressif/esp-mqtt.git
+
+[submodule "components/mozzi/Mozzi"]
+	path = components/mozzi/Mozzi
+	url = https://github.com/wingunder/Mozzi.git
+	branch = esp32_port
