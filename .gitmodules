@@ -58,6 +58,10 @@
 	path = components/mqtt/esp-mqtt
 	url = https://github.com/espressif/esp-mqtt.git
 
+[submodule "components/protobuf-c/protobuf-c"]
+	path = components/protobuf-c/protobuf-c
+	url = https://github.com/protobuf-c/protobuf-c
+
 [submodule "components/mozzi/Mozzi"]
 	path = components/mozzi/Mozzi
 	url = https://github.com/wingunder/Mozzi.git

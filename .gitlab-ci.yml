@@ -42,10 +42,10 @@ variables:
 # are removed.
 .git_clean_stale_submodules:  &git_clean_stale_submodules >
   find . -name '.git' -not -path './.git' -printf '%P\n'
-  | sed 's|/.git||' 
+  | sed 's|/.git||'
   | xargs -I {} sh -c '
-  grep -q {} .gitmodules 
-  ||  (echo "Removing {}, has .git directory but not in .gitmodules file" 
+  grep -q {} .gitmodules
+  ||  (echo "Removing {}, has .git directory but not in .gitmodules file"
   && rm -rf {});'
 
 # before each job, we need to check if this job is filtered by bot stage/job filter
@@ -326,7 +326,7 @@ verify_cmake_style:
   tags:
     - host_test
   dependencies: []
-    
+
 test_nvs_on_host:
   <<: *host_test_template
   script:
@@ -822,6 +822,12 @@ example_test_004_01:
     - ESP32
     - Example_CAN
 
+example_test_005_01:
+  <<: *example_test_template
+  tags:
+    - ESP32
+    - Example_WIFI_BT
+
 UT_001_01:
   <<: *unit_test_template
   tags:
@@ -1303,6 +1309,27 @@ UT_011_03:
   tags:
     - ESP32_IDF
     - EMMC
+
+UT_012_01:
+  <<: *unit_test_template
+  tags:
+    - ESP32_IDF
+    - UT_T1_1
+    - 8Mpsram
+
+UT_012_02:
+  <<: *unit_test_template
+  tags:
+    - ESP32_IDF
+    - UT_T1_1
+    - 8Mpsram
+
+UT_012_03:
+  <<: *unit_test_template
+  tags:
+    - ESP32_IDF
+    - UT_T1_1
+    - 8Mpsram
 
 UT_601_01:
   <<: *unit_test_template

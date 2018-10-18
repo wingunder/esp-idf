@@ -19,6 +19,7 @@ else()
 
     set(COMPONENT_SRCS "brownout.c"
                    "cache_err_int.c"
+                   "cache_sram_mmu.c"
                    "clk.c"
                    "coexist.c"
                    "core_dump.c"
@@ -30,6 +31,7 @@ else()
                    "esp_err_to_name.c"
                    "esp_timer.c"
                    "esp_timer_esp32.c"
+                   "esp_himem.c"
                    "ets_timer_legacy.c"
                    "event_default_handlers.c"
                    "event_loop.c"
@@ -75,8 +77,14 @@ else()
     endif()
     target_linker_script(esp32 "${CMAKE_CURRENT_BINARY_DIR}/esp32_out.ld")
 
+    if(CONFIG_SPIRAM_ALLOW_BSS_SEG_EXTERNAL_MEMORY)
+        # This has to be linked before esp32.common.ld
+        target_linker_script(esp32 "ld/esp32.extram.bss.ld")
+    endif()
+
+    target_linker_script(esp32 "ld/esp32.common.ld")
+
     target_linker_script(esp32
-        "ld/esp32.common.ld"
         "ld/esp32.rom.ld"
         "ld/esp32.peripherals.ld"
         "ld/esp32.rom.libgcc.ld"
@@ -113,6 +121,7 @@ else()
         MAIN_DEPENDENCY ${LD_DIR}/esp32.ld ${SDKCONFIG_H}
         COMMENT "Generating linker script..."
         VERBATIM)
+
     add_custom_target(esp32_linker_script DEPENDS ${CMAKE_CURRENT_BINARY_DIR}/esp32_out.ld)
     add_dependencies(esp32 esp32_linker_script)
 
